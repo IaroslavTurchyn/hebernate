@@ -11,15 +11,15 @@ public class MenuImpl implements Menu{
     private UserRepository userRepository;
     private final String[] items = {"""
             1.Create user
-            ---------
+            
             2.Update user
-            --------
+           
             3.Delete user 
-            --------
+           
             4.Show user info
-            --------
+            
             5.Show all users info
-            -------
+            
             0. Exit"""
     };
 
@@ -31,25 +31,29 @@ public class MenuImpl implements Menu{
      public  void show() {
         showItems(items);
         Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
         while (true) {
-            int choice = scanner.nextInt();
-
             switch (choice){
                 case 1:
                 userRepository.save();
                     show();
+                    break;
                 case 2:
                     userRepository.update();
                     show();
+                    break;
                 case 3:
                     userRepository.delete();
                     show();
+                    break;
                 case 4:
                     userRepository.getInfo();
-                    show();;
+                    show();
+                    break;
                 case 5:
                     userRepository.getAll().forEach(System.out::println);
                     show();
+                    break;
                 case 0:
                     exit();
                     break;
