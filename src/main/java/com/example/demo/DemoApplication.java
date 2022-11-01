@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
+    @Autowired
     public MenuImpl menu;
     @Autowired
     private UserRepository userRepository;

@@ -2,25 +2,26 @@ package com.example.demo.menu;
 
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.Scanner;
-@Repository
+@Component
 public class MenuImpl implements Menu{
-@Autowired
+    @Autowired
     private UserRepository userRepository;
-    private final String[] items = {"""
-            1.Create user
+    private final String[] items = {
+            "1.Create user",
             
-            2.Update user
+            "2.Update user",
            
-            3.Delete user 
+            "3.Delete user",
            
-            4.Show user info
+            "4.Show user info",
             
-            5.Show all users info
+            "5.Show all users info",
             
-            0. Exit"""
+            "0. Exit"
     };
 
 
