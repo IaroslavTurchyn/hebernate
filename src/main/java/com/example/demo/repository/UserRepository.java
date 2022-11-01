@@ -8,20 +8,57 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Scanner;
 
 @Repository
 public class UserRepository {
+    Scanner scanner=new Scanner(System.in);
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
-    public void save(User user) {
-        entityManager.persist(user);
+    public User findById(long id) {
+        return entityManager.find(User.class, id);
     }
 
     @Transactional
-    public void update(User user) {
-        entityManager.merge(user);
+    public void save() {
+        System.out.println("Enter your first name");
+        String firstName = scanner.next();
+
+        System.out.println("Enter your first name");
+        String lastName = scanner.next();
+
+        System.out.println("Enter your age");
+        int age = scanner.nextInt();
+
+        System.out.println("Enter your state: Male or Female ");
+        String state =scanner.next();
+
+        entityManager.persist(new User(firstName,lastName,age,state));
+    }
+
+    @Transactional
+    public void update() {
+        System.out.println("Please enter id:");
+        long id = scanner.nextLong();
+        User user = findById(id);
+        if (user == null) {
+            System.out.println("user not found");
+            System.exit(0);
+        }else {
+            System.out.println("Enter your  first name: ");
+            String firstName = scanner.next();
+
+            System.out.println("Enter your user  name: ");
+            String lastName = scanner.next();
+
+            System.out.println("Enter your  age : ");
+            int age = scanner.nextInt();
+
+            System.out.println("Enter your state: Male or Female ");
+            String state =scanner.next();
+            entityManager.merge(new User(id,firstName,lastName,age,state));
+        }
     }
 
     public List<User> getAll() {
@@ -29,31 +66,30 @@ public class UserRepository {
         return selectALL.getResultList();
     }
 
-    public List<User> getByAge(int age) {
-        Query selectByAge = entityManager.createQuery("select user FROM User user WHERE user.age<:age");
-        selectByAge.setParameter("age", age);
-        return selectByAge.getResultList();
+    public void getInfo() {
+        System.out.println("Enter user id:");
+        Long id = scanner.nextLong();
 
-    }
-
-    public User findById(long id) {
-        return entityManager.find(User.class, id);
-    }
-
-    public User findByFirstName(String firstname) {
-        Query selectByFirstName = entityManager.createQuery("select user FROM User user WHERE user.firstName=:firstName");
-        selectByFirstName.setParameter("firstName", firstname);
-        return (User) selectByFirstName.getSingleResult();
-    }
-
-    @Transactional
-    public void delete(long id) {
         User user = findById(id);
-        if (user != null) {
-            entityManager.remove(user);
+        if (user == null) {
+            System.out.println("User not found");
         } else {
-            System.out.println("user not found");
+            System.out.println(user);
         }
     }
 
-}
+
+        @Transactional
+        public void delete () {
+            System.out.println("Please enter id:");
+            long id = scanner.nextLong();
+            User user = findById(id);
+            if (user != null) {
+                entityManager.remove(user);
+            } else {
+                System.out.println("user not found");
+            }
+        }
+    }
+
+
