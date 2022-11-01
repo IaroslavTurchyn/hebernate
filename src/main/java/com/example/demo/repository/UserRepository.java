@@ -25,7 +25,7 @@ public class UserRepository {
         System.out.println("Enter your first name");
         String firstName = scanner.next();
 
-        System.out.println("Enter your first name");
+        System.out.println("Enter your last name");
         String lastName = scanner.next();
 
         System.out.println("Enter your age");
@@ -49,7 +49,7 @@ public class UserRepository {
             System.out.println("Enter your  first name: ");
             String firstName = scanner.next();
 
-            System.out.println("Enter your user  name: ");
+            System.out.println("Enter your last  name: ");
             String lastName = scanner.next();
 
             System.out.println("Enter your  age : ");
