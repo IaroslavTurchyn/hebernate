@@ -24,10 +24,6 @@ public class MenuImpl implements Menu{
             "0. Exit"
     };
 
-
-
-
-
     @Override
      public  void show() {
         showItems(items);
@@ -59,8 +55,6 @@ public class MenuImpl implements Menu{
                     exit();
                     break;
             }
-
-
         }
     }
 
